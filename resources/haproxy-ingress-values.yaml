@@ -1,0 +1,6 @@
+controller:
+  hostNetwork: true
+  ingressClass: public
+  ingressClassResource:
+    enabled: true
+    default: true

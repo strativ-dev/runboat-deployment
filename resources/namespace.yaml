@@ -1,0 +1,34 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: runboat-builds
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: runboat-build-user
+  namespace: runboat-builds
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: runboat-builds-full-access
+  namespace: runboat-builds
+rules:
+- apiGroups: ["", "networking.k8s.io", "apps", "batch"]
+  resources: ["*"]
+  verbs: ["get", "create", "update", "patch", "delete"]
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: runboat-builds-full-access-runboat-build-user
+  namespace: runboat-builds
+subjects:
+- kind: ServiceAccount
+  name: runboat-build-user
+  namespace: runboat-builds
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: runboat-builds-full-access
