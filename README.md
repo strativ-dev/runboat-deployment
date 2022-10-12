@@ -31,11 +31,24 @@
     ```
     PGPASSWORD='runboat_runboat' psql -h runboat.csej1ip8qm8x.us-east-1.rds.amazonaws.com -d postgres -U root
     ```
-- Configure Kubernetes using microk8s
-  - Run `resources/microk8s-setup.sh` script and exit the ssh session
-  - Login back and run `resources/haproxy-install.sh`
+- `ssh` into the instance and clone project repo
+  - `git clone --recursive https://github.com/strativ-dev/runboat-deployment.git`
 
-- clone oca runboat repo and make adjustments
-  - Change directory into runboat repo: `cd runboat/`
+- Configure Kubernetes using microk8s
+  - Run `runboat-deployment/resources/microk8s-setup.sh` script and exit the ssh session
+  - Login back and run `runboat-deployment/resources/haproxy-install.sh`
+
+- Configure oca runboat repo and make adjustments
+  - Change directory into runboat repo: `cd runboat-deployment/runboat/`
   - Create kubeconfig: `microk8s config > kubeconfig`
-  - 
+  - Copy docker-compose.yml: `cp ../resources/docker-compose.yml .`
+  - Make adjustments:
+    - put DB connection details at `RUNBOAT_BUILD_ENV`. Example: `runboat-controller-tmp.erp360.strativ.se`
+    - put DB password at `RUNBOAT_BUILD_SECRET_ENV`
+    - put Controller url at `RUNBOAT_BASE_URL`. Example: `http://runboat.erp360.strativ.se:8000`
+    - put Builds domain at `RUNBOAT_BUILD_DOMAIN`. Example: `runboat-builds-tmp.erp360.strativ.se`
+    - create personal github token from `https://github.com/settings/tokens/new` with permissions and put at `RUNBOAT_GITHUB_TOKEN`
+    - Configure webhook url
+      - Put `{base-url}:8000/webhooks/github` at `Payload URL` section
+      - Set `Content type` to `application/json`
+      - Put a secret value at *Secret* section and update `RUNBOAT_GITHUB_WEBHOOK_SECRET` at `docker-compose.yml`
