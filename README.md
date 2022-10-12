@@ -7,8 +7,8 @@
 
     DNS records examples for the controller and odoo builds live endpoint:
 
-    Controller(A record): runboat-controller-tmp.base-domain IP
-    Builds(A record): *.runboat-builds-tmp.base-domain IP
+    - Controller(A record): runboat-controller-tmp.base-domain IP
+    - Builds(A record): *.runboat-builds-tmp.base-domain IP
 
 - Create postgres database instance and collect credentials
     Example root username and password
