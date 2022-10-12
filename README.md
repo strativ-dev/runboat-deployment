@@ -7,8 +7,8 @@
 
     DNS records examples for the controller and odoo builds live endpoint:
 
-    Controller(A record): runboat-controller-tmp.<base domain> <IP>
-    Builds(A record): *.runboat-builds-tmp.<base domain> <IP>
+    Controller(A record): runboat-controller-tmp.base-domain IP
+    Builds(A record): *.runboat-builds-tmp.base-domain IP
 
 - Create postgres database instance and collect credentials
     Example root username and password
@@ -17,7 +17,7 @@
     DB root pass: runboat_runboat
     DB hostname:  runboat.csej1ip8qm8x.us-east-1.rds.amazonaws.com
 
-- Open Database instance 5432 port and disable external fire wall(if any) to the virtual machine for ease of installation. We should turn this back on after setup is complete
+- Open Database instance `5432` port and disable external fire wall(if any) to the virtual machine for ease of installation. We should turn this back on after setup is complete
 
 - Update/check firewalls so that the virtual machine can connect to database
 
@@ -27,7 +27,7 @@
     sudo apt install postgresql-client-common
     sudo apt install postgresql-client-14
     ```
-    Connect to the database:
+    Check database connection:
     ```
     PGPASSWORD='runboat_runboat' psql -h runboat.csej1ip8qm8x.us-east-1.rds.amazonaws.com -d postgres -U root
     ```
