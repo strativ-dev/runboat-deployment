@@ -32,5 +32,5 @@
     PGPASSWORD='runboat_runboat' psql -h runboat.csej1ip8qm8x.us-east-1.rds.amazonaws.com -d postgres -U root
     ```
 - Configure Kubernetes using microk8s
-  Run `microk8s-setup.sh` script and exit the ssh session
-  Login back and run `haproxy-install.sh`
+  - Run `microk8s-setup.sh` script and exit the ssh session
+  - Login back and run `haproxy-install.sh`
