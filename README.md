@@ -47,12 +47,11 @@
     - Change dir into the repo: `cd runboat-deployment`
 
 - Configure Kubernetes using microk8s
-  - Run `resources/microk8s-setup.sh` script and *exit the ssh session*
-  - Login back and run `resources/haproxy-install.sh`
+  - Run `bash resources/microk8s-setup.sh` script and *exit the ssh session*
+  - Login back, change dir into `cd runboat-deployment/resources` and run `bash haproxy-install.sh`
 
 - Configure oca runboat repo and make adjustments
-  - ~ Change directory into runboat repo: `cd runboat/`~
-  - Create kubeconfig: `microk8s config > runboat/kubeconfig`
+  - Change directory back to `runboat-deployment` and run `microk8s config > runboat/kubeconfig` to create kubeconfig
   - Copy docker-compose.yml: `cp resources/docker-compose.yml runboat/.`
   - Update `docker-compose.yml` inside `runboat/`:
     - put DB connection details(host, port, root username) at `RUNBOAT_BUILD_ENV`.
