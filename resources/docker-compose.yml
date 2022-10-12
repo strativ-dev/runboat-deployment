@@ -17,23 +17,23 @@ services:
       RUNBOAT_MAX_DEPLOYED: 1000
       RUNBOAT_BUILD_ENV: |
         {
-          "PGHOST": "<hostname>",
+          "PGHOST": "runboat.csej1ip8qm8x.us-east-1.rds.amazonaws.com",
           "PGPORT": "5432",
           "PGUSER": "root"
         }
       RUNBOAT_BUILD_SECRET_ENV: |
         {
-          "PGPASSWORD": "<password>"
+          "PGPASSWORD": "vzGa4pJpYDa3"
         }
       RUNBOAT_BUILD_TEMPLATE_VARS: |
         {
           "storageClassName": "microk8s-hostpath"
         }
       # the base url where the controller is reachable
-      RUNBOAT_BASE_URL: http://<controller-base-url>:8000
+      RUNBOAT_BASE_URL: http://runboat-controller-tmp.erp360.strativ.se:8000
       # domain suffix for builds
-      RUNBOAT_BUILD_DOMAIN: <build-domain-without-http>
-      RUNBOAT_GITHUB_TOKEN: <github-token>
+      RUNBOAT_BUILD_DOMAIN: runboat-builds-tmp.erp360.strativ.se
+      RUNBOAT_GITHUB_TOKEN: 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
       RUNBOAT_GITHUB_WEBHOOK_SECRET: some_secret
       RUNBOAT_ADDITIONAL_FOOTER_HTML: |
         <p>
@@ -44,74 +44,11 @@ services:
       RUNBOAT_REPOS : |
         [
           {
-            "repo": "^oca/(?!(ocb|openupgrade)$$).*",
-            "branch": "^15.0$$",
-            "builds": [
-              {
-                "image": "ghcr.io/oca/oca-ci/py3.8-odoo15.0:latest"
-              }
-            ]
-          },
-          {
-            "repo": "^k-hasan-19/.*",
-            "branch": "^15.0$$",
-            "builds": [
-              {
-                "image": "ghcr.io/oca/oca-ci/py3.8-odoo15.0:latest"
-              }
-            ]
-          },
-          {
-            "repo": "^oca/(?!(ocb|openupgrade)$$).*",
+            "repo": "k-hasan-19/.*",
             "branch": "^14.0$$",
             "builds": [
               {
                 "image": "ghcr.io/oca/oca-ci/py3.6-odoo14.0:latest"
-              }
-            ]
-          },
-          {
-            "repo": "^oca/(?!(ocb|openupgrade)$$).*",
-            "branch": "^13.0$$",
-            "builds": [
-              {
-                "image": "ghcr.io/oca/oca-ci/py3.6-odoo13.0:latest"
-              }
-            ]
-          },
-          {
-            "repo": "^oca/(queue|mis-builder)$$",
-            "branch": "^12.0$$",
-            "builds": [
-              {
-                "image": "ghcr.io/oca/oca-ci/py3.6-odoo12.0:latest"
-              }
-            ]
-          },
-          {
-            "repo": "^k-hasan-19/(queue|mis-builder)$$",
-            "branch": "^12.0$$",
-            "builds": [
-              {
-                "image": "ghcr.io/oca/oca-ci/py3.6-odoo12.0:latest"
-              }
-            ]
-          },
-          {
-            "repo": "^oca/(queue|mis-builder)$$",
-            "branch": "^11.0$$",
-            "builds": [
-              {
-                "image": "ghcr.io/oca/oca-ci/py3.5-odoo11.0:latest"
-              }
-            ]
-          },
-          {
-            "repo": "^oca/(queue|mis-builder)$$",
-            "branch": "^10.0$$",
-            "builds": [
-              {
-                "image": "ghcr.io/oca/oca-ci/py2.7-odoo10.0:latest"
               }
             ]
           }
