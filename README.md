@@ -63,12 +63,12 @@
     - Put a secret value at *Secret* section and update `RUNBOAT_GITHUB_WEBHOOK_SECRET` at `docker-compose.yml`
 
     - Run docker-compose: `docker-compose up` inside `runboat/`
-    - Visit 8000 port at base url to check if its working. e.g. http://runboat.erp360.strativ.se:8000
+    - Visit 8000 port at base url to check if its working. e.g. `http://runboat.erp360.strativ.se:8000`
     - Select the odoo plugin repo and configure `RUNBOAT_REPOS` based on the repo name
     - Configure webhook url in the target repo
-      - Put `{controller-base-url}:8000/webhooks/github` at `Payload URL` section. e.g. http://runboat.erp360.strativ.se:8000/webhooks/github
+      - Put `{controller-base-url}:8000/webhooks/github` at `Payload URL` section. e.g. `http://runboat.erp360.strativ.se:8000/webhooks/github`
       - Set `Content type` to `application/json`
       - Put the value of `RUNBOAT_GITHUB_WEBHOOK_SECRET` at secret section
       - Select `push` && `pull-request` from events and save
 
-- Finally, if everythings done accordingly, make changes to the repo and push to target branch and the visit http://runboat-controller-tmp.erp360.strativ.se:8000/webui/build.html?name=
+- Finally, if everythings done accordingly, make changes to the repo and push to target branch and the visit the deployment url configured. e.g. `http://runboat-controller-tmp.erp360.strativ.se:8000/webui/build.html?name=`
