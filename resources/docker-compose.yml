@@ -1,0 +1,101 @@
+version: "3"
+services:
+  runboat:
+    build: .  # where runboat's Dockerfile is
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./kubeconfig:/kubeconfig:ro  # a kubeconfig that has permission to manage k8s resources
+      - ./log-config.yaml:/etc/runboat-log-config.yaml:ro  # a python logging configuration
+    environment:
+      KUBECONFIG: /kubeconfig
+      RUNBOAT_BUILD_NAMESPACE: runboat-builds  # the kubernetes namespaces where builds are deployed
+      RUNBOAT_API_ADMIN_USER: admin  # the admin user for some API operations
+      RUNBOAT_API_ADMIN_PASSWD: XXX
+      RUNBOAT_MAX_INITIALIZING: 20  
+      RUNBOAT_MAX_STARTED: 100
+      RUNBOAT_MAX_DEPLOYED: 1000
+      RUNBOAT_BUILD_ENV: |
+        {
+          # Parameters for the postgres db which builds use
+          "PGHOST": "runbot-db.odoo-community.org",
+          "PGPORT": "5432",
+          "PGUSER": "runboat-build"
+        }
+      RUNBOAT_BUILD_SECRET_ENV: |
+        {
+          "PGPASSWORD": "XXX"
+        }
+      RUNBOAT_BUILD_TEMPLATE_VARS: |
+        {
+          # this is the storage class name for the default microk8s storage addon
+          "storageClassName": "microk8s-hostpath"
+        }
+      # the base url where the controller is reachable
+      RUNBOAT_BASE_URL: https://runboat.odoo-community.org
+      # domain suffix for builds
+      RUNBOAT_BUILD_DOMAIN: runboat.odoo-community.org
+      RUNBOAT_GITHUB_TOKEN: XXX
+      RUNBOAT_ADDITIONAL_FOOTER_HTML: |
+        <p>
+           Controller and builds running on OCA infrastructure,
+           thanks to <a href="https://odoo-community.org/members">members</a> 
+           and <a href="https://odoo-community.org/partners">sponsors</a> support.
+        </p>
+      RUNBOAT_REPOS : |
+        [
+          {
+            "repo": "^oca/(?!(ocb|openupgrade)$$).*",
+            "branch": "^15.0$$",
+            "builds": [
+              {
+                "image": "ghcr.io/oca/oca-ci/py3.8-odoo15.0:latest"
+              }
+            ]
+          },
+          {
+            "repo": "^oca/(?!(ocb|openupgrade)$$).*",
+            "branch": "^14.0$$",
+            "builds": [
+              {
+                "image": "ghcr.io/oca/oca-ci/py3.6-odoo14.0:latest"
+              }
+            ]
+          },
+          {
+            "repo": "^oca/(?!(ocb|openupgrade)$$).*",
+            "branch": "^13.0$$",
+            "builds": [
+              {
+                "image": "ghcr.io/oca/oca-ci/py3.6-odoo13.0:latest"
+              }
+            ]
+          },
+          {
+            "repo": "^oca/(queue|mis-builder)$$",
+            "branch": "^12.0$$",
+            "builds": [
+              {
+                "image": "ghcr.io/oca/oca-ci/py3.6-odoo12.0:latest"
+              }
+            ]
+          },
+          {
+            "repo": "^oca/(queue|mis-builder)$$",
+            "branch": "^11.0$$",
+            "builds": [
+              {
+                "image": "ghcr.io/oca/oca-ci/py3.5-odoo11.0:latest"
+              }
+            ]
+          },
+          {
+            "repo": "^oca/(queue|mis-builder)$$",
+            "branch": "^10.0$$",
+            "builds": [
+              {
+                "image": "ghcr.io/oca/oca-ci/py2.7-odoo10.0:latest"
+              }
+            ]
+          }
+        ]
