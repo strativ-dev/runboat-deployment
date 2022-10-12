@@ -42,7 +42,7 @@
   - Change directory into runboat repo: `cd runboat-deployment/runboat/`
   - Create kubeconfig: `microk8s config > kubeconfig`
   - Copy docker-compose.yml: `cp ../resources/docker-compose.yml .`
-  - Make adjustments:
+  - Update docker-compose.yml:
     - put DB connection details at `RUNBOAT_BUILD_ENV`. Example: `runboat-controller-tmp.erp360.strativ.se`
     - put DB password at `RUNBOAT_BUILD_SECRET_ENV`
     - put Controller url at `RUNBOAT_BASE_URL`. Example: `http://runboat.erp360.strativ.se:8000`
