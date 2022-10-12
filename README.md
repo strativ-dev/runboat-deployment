@@ -20,30 +20,28 @@
     - Controller(A record): `runboat-controller-tmp.{base-domain} instance-IP`
     - Builds(A record): `*.runboat-builds-tmp.{base-domain} instance-IP`
 
-- Create postgres database instance and collect credentials
-    Example root username and password
-
-    DB root user: root
-    DB root pass: runboat_runboat
-    DB hostname:  runboat.csej1ip8qm8x.us-east-1.rds.amazonaws.com
+- Create postgres database instance and collect credentials.
+  - Example root username and password
+    - DB root user: `root`
+    - DB root pass: `runboat_runboat`
+    - DB hostname:  `runboat.csej1ip8qm8x.us-east-1.rds.amazonaws.com`
 
 - Open Database instance `5432` port and disable external fire wall(if any) to the virtual machine for ease of installation. We should turn this back on after setup is complete
 
 - Update/check firewalls so that the virtual machine can connect to database
 
 - Login into virtual machine and check if the virtual machine can connect to the database
-    Install psql client:
-    ```
-    sudo apt install postgresql-client-common
-    sudo apt install postgresql-client-14
-    ```
-    Check database connection:
-    ```
-    PGPASSWORD='runboat_runboat' psql -h <db-host> -d postgres -U root
-    ```
-- `ssh` into the instance and clone project repo
-  - `git clone --recursive https://github.com/strativ-dev/runboat-deployment.git`
-  - `cd runboat-deployment`
+    - Install psql client:
+      ```
+      sudo apt install postgresql-client-common
+      sudo apt install postgresql-client-14
+      ```
+    - Check database connection:
+      ```
+      PGPASSWORD='runboat_runboat' psql -h <db-host> -d postgres -U root
+      ```
+    - Clone the deployment repo: `git clone --recursive https://github.com/strativ-dev/runboat-deployment.git`
+    - Change dir into the repo: `cd runboat-deployment`
 
 - Configure Kubernetes using microk8s
   - Run `resources/microk8s-setup.sh` script and *exit the ssh session*
