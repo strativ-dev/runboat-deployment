@@ -1,3 +1,5 @@
+Video walkthrough: https://youtu.be/1BKVH2HUuig
+
 - Create virtual machine `instance` (Ubuntu/2GM Memory)
 
     Run following Cmds on vitual machine to get latest patches:
